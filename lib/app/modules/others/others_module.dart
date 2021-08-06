@@ -5,11 +5,30 @@ import 'package:flutter_modular/flutter_modular.dart';
 class OthersModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => OthersStore()),
-  ];
+    Bind.singleton((i) => ControllerAnotherModule(
+        i())), // pede a injeção de uma string, mas ela vem de outro modulo
+    // dessa maneira, a string requerida vem do parent (app_modules)
 
-  @override
-  final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => OthersPage()),
+    Bind.singleton((i) => ControllerAnotherModuleToModule(i(), i())),
   ];
+}
+
+class ControllerAnotherModule {
+  final String name;
+  ControllerAnotherModule(this.name);
+
+  printText() {
+    print('Name: $name');
+  }
+}
+
+class ControllerAnotherModuleToModule {
+  final String name;
+  final bool isInjected;
+
+  ControllerAnotherModuleToModule(this.name, this.isInjected);
+
+  printText() {
+    print('Name: $name');
+  }
 }

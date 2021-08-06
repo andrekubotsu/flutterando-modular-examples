@@ -2,9 +2,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular_test/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterando_modular/app/app_module.dart';
+import 'package:flutterando_modular/app/modules/others/others_module.dart';
 
 void main() {
-  initModule(AppModule()); // declara para o teste entender
+  initModules([AppModule(), OthersModule()]); // declara para o teste entender
 
   test('Get Controller - factory', () {
     final controller = Modular.get<Controller>();
@@ -41,6 +42,18 @@ void main() {
   test('Get Controller - Dependency Injection Example', () {
     final controller = Modular.get<DependencyInjectionExample>();
 
+    controller.printText(); // para mostrar o que é cada um
+  });
+
+  test('Get Controller - Parent -> Child', () {
+    // por causa da hierarquia, a instancia 'name' vem do app_module para o other_module
+    final controller = Modular.get<ControllerAnotherModule>();
+    controller.printText(); // para mostrar o que é cada um
+  });
+
+  test('Get Controller - Parent -> Child <-> Child', () {
+    // por causa da hierarquia, a instancia 'name' vem do app_module para o other_module
+    final controller = Modular.get<ControllerAnotherModuleToModule>();
     controller.printText(); // para mostrar o que é cada um
   });
 }
