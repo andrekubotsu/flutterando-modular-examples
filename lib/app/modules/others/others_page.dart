@@ -1,16 +1,17 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutterando_modular/app/modules/others/others_store.dart';
+
 import 'package:flutter/material.dart';
+
+import 'others_store.dart';
 
 class OthersPage extends StatefulWidget {
   final String title;
-  const OthersPage({Key? key, this.title = 'OthersPage'}) : super(key: key);
+  const OthersPage({Key? key, this.title = "Others Page"}) : super(key: key);
   @override
   OthersPageState createState() => OthersPageState();
 }
-class OthersPageState extends State<OthersPage> {
-  final OthersStore store = Modular.get();
 
+class OthersPageState extends ModularState<OthersPage, OthersStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,13 @@ class OthersPageState extends State<OthersPage> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          ElevatedButton(
+              onPressed: () {
+                Modular.to.navigate('/');
+              },
+              child: Text('Auth Page'))
+        ],
       ),
     );
   }

@@ -10,6 +10,13 @@ class OthersModule extends Module {
     // dessa maneira, a string requerida vem do parent (app_modules)
 
     Bind.singleton((i) => ControllerAnotherModuleToModule(i(), i())),
+
+    Bind.singleton((i) => OthersStore())
+  ];
+
+  @override
+  final List<ModularRoute> routes = [
+    ChildRoute('/', child: (_, args) => OthersPage()),
   ];
 }
 

@@ -21,11 +21,22 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       body: Observer(
         builder: (context) => Text('${store.counter}'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          store.increment();
-        },
-        child: Icon(Icons.add),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                Modular.to.pushNamed('/others');
+              },
+              child: Text("Go to Others")),
+          FloatingActionButton(
+            onPressed: () {
+              store.increment();
+            },
+            child: Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }

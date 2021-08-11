@@ -3,13 +3,13 @@ import 'package:mobx/mobx.dart';
 part 'auth_store.g.dart';
 
 class AuthStore = _AuthStoreBase with _$AuthStore;
-abstract class _AuthStoreBase with Store {
 
+abstract class _AuthStoreBase with Store {
   @observable
-  int value = 0;
+  String name = "";
 
   @action
-  void increment() {
-    value++;
-  } 
+  void addName() {
+    name = "Andre";
+  }
 }
